@@ -4,6 +4,8 @@ import redis
 from database import load_movies
 from scipy.sparse import load_npz
 import logging
+import pickle
+
 
 app = Flask(__name__)
 
@@ -18,8 +20,8 @@ redis_client = redis.StrictRedis(
     decode_responses=False  # Ensure binary responses
 )
 
-# Load sparse similarity matrix from file
-similarity = load_npz("similarity_matrix.npz")
+with open('similarity.pkl', 'rb') as f:
+    similarity = pickle.load(f)
 
 # Load the movie list from PostgreSQL
 movies = load_movies()
