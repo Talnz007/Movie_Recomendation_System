@@ -1,0 +1,7 @@
+streamlit==1.37.0
+requests==2.32.3
+Flask==3.0.3
+redis==5.0.8
+scipy==1.14.0
+psycopg2-binary==2.9.9
+pandas==2.2.2
