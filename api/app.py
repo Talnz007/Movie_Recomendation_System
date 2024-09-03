@@ -19,7 +19,7 @@ redis_client = redis.StrictRedis(
 )
 
 # Load sparse similarity matrix from file
-similarity = load_npz("../similarity_matrix.npz")
+similarity = load_npz("similarity_matrix.npz")
 
 # Load the movie list from PostgreSQL
 movies = load_movies()
