@@ -23,7 +23,7 @@ To get started with the Movie Recommendation System, follow these steps:
 
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/movie-recommendation-system.git
+    git clone https://github.com/Talnz007/Movie_Recomendation_System.git
     cd movie-recommendation-system
     ```
 
