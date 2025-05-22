@@ -8,6 +8,15 @@
 A machine learning-powered movie recommendation system built with Python, leveraging vector embeddings (pgvector) on Supabase for scalable, fast, and personalized suggestions. Now featuring a "Watch" button for instant movie viewing!
 
 ---
+## 🖼️ UI Preview
+
+![UI Screenshot](assets/ui_screenshot.png)
+
+## 🎬 Demo
+
+![App Demo](assets/demo.mp4)
+
+---
 
 ## 🚀 Features
 
