@@ -99,7 +99,7 @@ TMDB_API_KEY=your_tmdb_api_key
 3. **Get recommendations:** The system finds similar movies using vector similarity search.
 4. **Watch a movie:** Click the "Watch" button to stream a recommended title.
 
-**OR JUST GO TO [This Link](https://recommenders.streamlit.app/)**
+**OR JUST GO TO** [This Link](https://recommenders.streamlit.app/)
 ---
 
 ## 🧠 How It Works
