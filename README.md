@@ -14,7 +14,7 @@ A machine learning-powered movie recommendation system built with Python, levera
 
 ## 🎬 Demo
 
-![App Demo](assets/demo.mp4)
+![App Demo](assets/demo.gif)
 
 ---
 
