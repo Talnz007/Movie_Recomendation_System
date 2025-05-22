@@ -1,24 +1,31 @@
+import os
 import streamlit as st
 import requests
 import streamlit.components.v1 as components
-from database import load_movies
+from database import fetch_movie_by_title, fetch_similar_movies, fetch_all_movie_titles
+from dotenv import load_dotenv
 
-# Load movie list
+load_dotenv()
+TMDB_API = os.getenv('TMDB_API_KEY')
+
+# Prepare movie titles and IDs
+movies_dict = {}
 try:
-    movies_df = load_movies()  # This should return a DataFrame
-    if movies_df.empty:
+    # Dynamically fetch movie titles from the database
+    movie_titles = fetch_all_movie_titles()
+    if movie_titles:
+        movies_dict = {movie['title']: movie['id'] for movie in movie_titles}
+    else:
         st.error("No movies found in the database.")
         st.stop()
 except Exception as e:
     st.error(f"Error loading movie list: {e}")
     st.stop()
 
-# Prepare movie titles and IDs
-movies_dict = {row['title']: row['id'] for _, row in movies_df.iterrows()}
 
 def fetch_poster(movie_id):
     try:
-        url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key=c7ec19ffdd3279641fb606d19ceb9bb1&language=en-US"
+        url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={TMDB_API}"
         response = requests.get(url)
         response.raise_for_status()  # Raise an exception for HTTP errors
         data = response.json()
@@ -31,13 +38,18 @@ def fetch_poster(movie_id):
 
 def fetch_recommendations(movie_title):
     try:
-        # Replace with your actual Flask API URL
-        response = requests.get(f'http://127.0.0.1:5000/recommend?movie={movie_title}')
-        response.raise_for_status()  # Raise an exception for HTTP errors
-        return response.json().get('recommendations', [])
-    except requests.RequestException as e:
+        # Fetch movie data from the database
+        movie_data = fetch_movie_by_title(movie_title)
+        if movie_data:
+            recommendations = fetch_similar_movies(movie_data["embedding"])
+            return recommendations
+        else:
+            st.error("Movie not found.")
+            return []
+    except Exception as e:
         st.error(f"Error fetching recommendations: {e}")
     return []
+
 
 st.header("Movie Recommender System")
 
@@ -62,7 +74,21 @@ if st.button("Show Recommend"):
                 with cols[i]:
                     st.text(movie)
                     if poster_url:
-                        st.image(poster_url)
+                        # Store the play URL with the poster
+                        tmdb_id = movie_id
+                        play_url = f"https://multiembed.mov/?video_id={tmdb_id}&tmdb=1" if tmdb_id else None
+
+                        # Create a clickable image that opens the movie
+                        if play_url:
+                            # Use HTML to create a clickable image that opens in a new tab
+                            st.markdown(f'''
+                                <a href="{play_url}" target="_blank">
+                                    <img src="{poster_url}" style="width:100%; cursor:pointer;" />
+                                </a>
+                            ''', unsafe_allow_html=True)
+                        else:
+                            # If no play URL, just show the poster
+                            st.image(poster_url)
                     else:
                         st.text("Poster not available")
     else:

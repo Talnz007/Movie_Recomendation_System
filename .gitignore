@@ -1,3 +1,59 @@
-.streamlit/secrets.toml
+# Environment variables
 .env
-.vercel
+
+# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+env/
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Large data files
+*.csv
+*.pkl
+*.npy
+
+# Deployment-specific
+.elasticbeanstalk/
+.ebextensions/
+.vercel/
+
+# Other
+bfg.jar
+package-lock.json
+Movie_Recommender.zip
+.streamlit/
+Procfile
+origin/
+se_player.php
+wsgi.py
