@@ -14,9 +14,9 @@ logging.basicConfig(level=logging.INFO)
 
 # Redis connection setup
 redis_client = redis.StrictRedis(
-    host='redis-14520.c305.ap-south-1-1.ec2.redns.redis-cloud.com',
-    port=14520,
-    password='oDEwiX0SSQIKnc4PNJngPJJ9ziRe0gvP',
+    host='redis-host',
+    port=redis_port,
+    password='password',
     decode_responses=False  # Ensure binary responses
 )
 
