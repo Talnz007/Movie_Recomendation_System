@@ -63,7 +63,7 @@ imageCarouselComponent(imageUrls=imageUrls, height=200)
 
 selectvalue = st.selectbox("Pick movie from dropdown", list(movies_dict.keys()))
 
-if st.button("Show Recommend"):
+if st.button("Recommend Movie"):
     recommendations = fetch_recommendations(selectvalue)
     if recommendations:
         cols = st.columns(5)
